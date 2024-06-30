@@ -1,4 +1,8 @@
+require('dotenv').config();
 import { Client } from 'node-appwrite';
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // This is your Appwrite function
 // It's executed each time we get a request
@@ -18,6 +22,7 @@ export default async ({ req, res, log, error }) => {
 
   // The `req` object contains the request data
   if (req.method === 'GET') {
+    
     // Send a response with the res object helpers
     // `res.send()` dispatches a string back to the client
     return res.send('Hello, World!');
