@@ -11,12 +11,8 @@ test.group('User Registration', (group) => {
 
   group.teardown(async () => {
     await Database.rollbackGlobalTransaction()
-  })
+  }) 
 
-  test('should return 422 if validation fails', async ({ client }) => {
-    const response = await client.post('/auth/register').json({})
-    response.assertStatus(HttpStatusCodeEnum.UNPROCESSABLE_ENTITY)
-  })
 
   test('should return 201 if registration is successful and default organisation is created', async ({ client, assert }) => {
     const response = await client.post('/auth/register').json({
@@ -44,5 +40,10 @@ test.group('User Registration', (group) => {
     assert.isNotNull(user)
     assert .isNotNull(organisation)
   })
+
+  test('should return 422 if validation fails', async ({ client }) => {
+    const response = await client.post('/auth/register').json({})
+    response.assertStatus(HttpStatusCodeEnum.UNPROCESSABLE_ENTITY)
+  }) 
 
 })
